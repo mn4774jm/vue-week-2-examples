@@ -15,11 +15,11 @@
     overflow: scroll;
 }
 
-.present {
+.present-true {
     color: gray;
     font-style: italic;
 }
 
-.absent {
+.present-false {
     font-weight: bold;
 }
