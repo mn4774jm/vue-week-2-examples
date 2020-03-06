@@ -51,6 +51,12 @@
                     </select>
                 </div>
 
+                <div class="form-group">
+                    <label class="form-label" for="notes">Notes:</label>
+                    <!-- v-model -->
+                    <input id="notes" class="form-control" v-model.trim.lazy="notes">
+                </div>
+
                 <div class="form-check-inline">
                     <!-- TODO v-model, v-bind value -->
                     <input id="v2" class="form-check-input" type="radio" v-bind:value="traditional" v-model="digitalTraditional">
@@ -61,6 +67,12 @@
                     <!-- TODO v-model, v-bind value -->
                     <input id="v1" class="form-check-input" type="radio" v-bind:value="digital" v-model="digitalTraditional">
                     <label class="form-check-label" for="v1">{{ digital }}</label>
+                </div>
+
+                <div class="form-check-inline">
+                    <!-- TODO v-model, v-bind value -->
+                    <input class="form-check-input" type="checkbox" v-on:change="finished" v-model="checkFinished">
+                    <label class="form-check-label" for="v1">{{ finished }}?</label>
                 </div>
 
                 <div>
@@ -86,12 +98,16 @@
                         <th>How long?</th>
                         <th>Type</th>
                         <th>Digital or traditional?</th>
+                        <th>Finished</th>
+                        <th>Notes</th>
                     </tr>
                     <tr v-for="record in activityRecords">
                         <td>{{ record.when | shortDateFormat}}</td>
-                        <td>{{ record.howLong }}</td>
+                        <td>{{ record.howLong | decimalPlaces}}</td>
                         <td>{{ record.type }}</td>
                         <td>{{ record.digitalTraditional }}</td>
+                        <td>{{ record.checkFinished }}</td>
+                        <td>{{ record.notes | characterLimit }}</td>
                     </tr>
                     <!-- TODO display one table row for each activityRecord  -->
                 </table>
@@ -131,6 +147,8 @@
             types: ['sketching', 'painting', 'drawing'],
             digital: 'digital',
             traditional: 'traditional',
+            finished: 'finished',
+            notes: '',
             errors: []
         },
         computed: {
@@ -177,7 +195,9 @@
                         when: this.whenLocal,
                         howLong: this.howLong,
                         type: this.type,
-                        digitalTraditional: this.digitalTraditional
+                        digitalTraditional: this.digitalTraditional,
+                        checkFinished: this.checkFinished,
+                        notes: this.notes
                     }
                     this.activityRecords.push(record)
                     this.activityRecords.sort(function (r1, r2) {
@@ -192,6 +212,12 @@
             },
             shortDateFormat(date) {
                 return new Intl.DateTimeFormat().format(date)
+            },
+            characterLimit(notes) {
+                return notes.slice(0, 39)
+            },
+            decimalPlaces(howLong) {
+                return howLong.toFixed(2)
             }
         }
     })

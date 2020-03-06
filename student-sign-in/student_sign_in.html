@@ -89,7 +89,7 @@
                         let student = {name: this.newStudentName, starID: this.newStarID}
                         this.students.push(student)
                         this.students.sort(function (s1, s2){
-                            return s1.name > s2.name ? 1: -1
+                            return s1.name.toLowerCase() > s2.name.toLowerCase() ? 1: -1
                         })
                         this.newStudentName = ''
                         this.newStarID = ''
