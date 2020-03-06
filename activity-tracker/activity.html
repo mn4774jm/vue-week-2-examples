@@ -101,7 +101,8 @@
                         <th>Finished</th>
                         <th>Notes</th>
                     </tr>
-                    <tr v-for="record in activityRecords">
+<!--                    bind new class for each record-->
+                    <tr v-for="record in activityRecords" v-bind:class="record.type">
                         <td>{{ record.when | shortDateFormat}}</td>
                         <td>{{ record.howLong | decimalPlaces}}</td>
                         <td>{{ record.type }}</td>
