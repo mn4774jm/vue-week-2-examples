@@ -109,7 +109,9 @@
                         <td>{{ record.checkFinished }}</td>
                         <td>{{ record.notes | characterLimit }}</td>
                     </tr>
+
                     <!-- TODO display one table row for each activityRecord  -->
+
                 </table>
             </div>
         </div>
@@ -157,19 +159,19 @@
                 this.types.forEach(type => {
                     let totalForType = this.activityRecords
                         .filter(function (record) { return record.type === type })
-                        .reduce(function (accumulator, current) { return accumulator + current.howLong }, 0)
+                        .reduce(function (accumulator, current) { return accumulator + current.howLong }, 0);
                     hoursByType[type] = totalForType
                 })
                 return hoursByType
             },
             whenLocal(){
-                let date = new Date(this.when)
-                let timestamp = date.getTime() + (date.getTimezoneOffset() * 60 * 1000)
-                let localDate = new Date(timestamp)
+                let date = new Date(this.when);
+                let timestamp = date.getTime() + (date.getTimezoneOffset() * 60 * 1000);
+                let localDate = new Date(timestamp);
                 return localDate
             },
             totalHours() {
-                let total = 0
+                let total = 0;
                 if (this.activityRecords.length > 0) {
                     total = this.activityRecords.reduce(function (hoursAccumulator, currentRecord){
                         return hoursAccumulator + currentRecord.howLong
@@ -204,7 +206,8 @@
                         return r1.when.getTime() - r2.when.getTime()
                     })
                 }
-            }
+            },
+
         },
         filters: {
             lowercase(text) {
@@ -218,7 +221,8 @@
             },
             decimalPlaces(howLong) {
                 return howLong.toFixed(2)
-            }
+            },
+
         }
     })
 

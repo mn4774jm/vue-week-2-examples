@@ -2,3 +2,14 @@
     max-height: 250px;
     overflow: scroll;
 }
+
+.sketching {
+    font-weight: bold;
+    font-style: italic;
+}
+
+.drawing {
+    font-style: italic;
+    font-weight: bold;
+}
+
